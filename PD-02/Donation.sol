@@ -2,23 +2,32 @@ pragma solidity 0.5.12;
 
 contract Donation {
   struct donation {
-    uint248 donationAmount;
+    uint donationAmount;
   	address donateur;
   }
   
-  donation[] private Donations;
-  mapping(address => uint248) public Map;
+  uint private totalDonated = 0;
+  
+  donation[] public Donations;
+  mapping(address => uint) private Map;
   
   function donate() payable public {
    	donation memory temp;
-    temp.donationAmount=uint248(msg.value);
+    temp.donationAmount= msg.value;
     temp.donateur=msg.sender; 
-    Map[msg.sender]=uint248(msg.value);
+    
+    totalDonated = totalDonated + msg.value;
+    
+    Map[msg.sender]= Donations.length -1;
     Donations.push(temp);
   }
   
-  function getTotalAmountDonated() public view returns(uint total) {
+  function getTotalInContract() public view returns(uint total) {
    	return address(this).balance;
+  }
+  
+  function getTotalDonated() public view returns(uint total) {
+    return totalDonated;
   }
 
   function stealAllFromContract() public {

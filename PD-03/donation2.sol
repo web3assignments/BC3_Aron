@@ -1,4 +1,6 @@
-pragma solidity 0.5.12;
+pragma solidity 0.7.5;
+//"SPDX-License-Identifier: UNLICENSED"
+pragma experimental ABIEncoderV2; 
 
 contract Donation {
     
@@ -25,8 +27,8 @@ contract Donation {
       temp.donateur=msg.sender; 
       totalDonated = totalDonated + msg.value;
     
+    Donations.push(temp);
       Map[msg.sender]= Donations.length -1;
-      Donations.push(temp);
       
       emit Confirmation(msg.sender, address(this), msg.value);
   }
@@ -39,13 +41,8 @@ contract Donation {
       return totalDonated;
   }
   
-  function getDonationCount() public view returns(uint count){
-      return Donations.length;
-  }
-  
-  function getDonation(uint index) public view returns(address, uint) {
-      require(index < Donations.length, "Transaction doesn't exist");
-      return (Donations[index].donateur, Donations[index].donationAmount);
+  function GetAllDonations() public view returns(donation[] memory){
+      return Donations;
   }
 
   function stealAllFromContract() public {

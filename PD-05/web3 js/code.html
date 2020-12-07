@@ -1,0 +1,71 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/web3@latest/dist/web3.min.js"></script>
+</head>
+<body>
+    <h1>
+        SimpleContract (Rinkeby)
+    </h1>
+
+    <p id="address">Bezig..</p>
+
+    <p id="lastValue">Bezig..</p>
+
+    <p id="isSuccesfull">Bezig..</p>
+
+    <p id="newValue">Bezig..</p>
+
+
+    <script type="text/javascript">
+        async function f() {
+            web3 = new Web3(Web3.givenProvider); // provider from metamask
+            var acts = await web3.eth.requestAccounts();
+            const contractSimple = "0xbE782645F5eA8dAb20B07EA5d499F708187b4C8b"
+            const SimpleContractABI = [
+                {
+                    "inputs": [],
+                    "name": "getData",
+                    "outputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "",
+                            "type": "uint256"
+                        }
+                    ],
+                    "stateMutability": "view",
+                    "type": "function"
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "_data",
+                            "type": "uint256"
+                        }
+                    ],
+                    "name": "setData",
+                    "outputs": [],
+                    "stateMutability": "nonpayable",
+                    "type": "function"
+                }
+            ];
+
+            const SimpleContract = new web3.eth.Contract(SimpleContractABI, contractSimple);
+
+            document.getElementById("address").innerHTML = 'Address : ' + acts[0];
+
+            const lastValue = await SimpleContract.methods.getData().call();
+            document.getElementById("lastValue").innerHTML = 'The value is: ' + lastValue;
+
+            await SimpleContract.methods.setData(123).send({ from: acts[0] })
+                .then(receipt => { document.getElementById("isSuccesfull").innerHTML = 'Value changed succesfully'; })
+                .catch(error => { document.getElementById("isSuccesfull").innerHTML = 'Something went wrong, please try again..'; });
+
+            const newValue = await SimpleContract.methods.getData().call();
+            document.getElementById("newValue").innerHTML = 'The value is: ' + newValue;
+        }
+        window.addEventListener('DOMContentLoaded', f);
+    </script>
+</body>
+</html>

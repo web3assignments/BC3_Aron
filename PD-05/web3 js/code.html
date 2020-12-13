@@ -20,7 +20,7 @@
     <script type="text/javascript">
         async function f() {
             web3 = new Web3(Web3.givenProvider); // provider from metamask
-            var acts = await web3.eth.requestAccounts();
+            var acts = await web3.eth.accounts();
             const contractSimple = "0xbE782645F5eA8dAb20B07EA5d499F708187b4C8b"
             const SimpleContractABI = [
                 {

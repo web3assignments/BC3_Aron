@@ -1,0 +1,158 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/web3@latest/dist/web3.min.js"></script>
+</head>
+<body>
+    <h1>
+        Doneer (Goerli)
+    </h1>
+    <p id="TotalDonated"></p>
+
+    <p id="TotalContract"></p>
+
+    <p id="LastDonations"></p>
+
+    <button onclick="Doneer()">Doneer 1000 wei</button>
+
+
+    <script type="text/javascript">
+        var address;
+        var contract;
+
+        async function f() {
+            web3 = new Web3(Web3.givenProvider); // provider from metamask
+            var acts = await web3.eth.requestAccounts();
+            address = acts[0];
+            const contractSimple = "0x10282FFDa69240e7edE93795AB636Ae61940cD20"
+            const SimpleContractABI = [
+                {
+                    "anonymous": false,
+                    "inputs": [
+                        {
+                            "indexed": false,
+                            "internalType": "address",
+                            "name": "from",
+                            "type": "address"
+                        },
+                        {
+                            "indexed": false,
+                            "internalType": "address",
+                            "name": "to",
+                            "type": "address"
+                        },
+                        {
+                            "indexed": false,
+                            "internalType": "uint256",
+                            "name": "amount",
+                            "type": "uint256"
+                        }
+                    ],
+                    "name": "Confirmation",
+                    "type": "event"
+                },
+                {
+                    "inputs": [],
+                    "name": "donate",
+                    "outputs": [],
+                    "stateMutability": "payable",
+                    "type": "function"
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "address payable",
+                            "name": "receiver",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "amount",
+                            "type": "uint256"
+                        }
+                    ],
+                    "name": "sendTotalAmountToGoedDoel",
+                    "outputs": [],
+                    "stateMutability": "nonpayable",
+                    "type": "function"
+                },
+                {
+                    "inputs": [],
+                    "name": "stealAllFromContract",
+                    "outputs": [],
+                    "stateMutability": "nonpayable",
+                    "type": "function"
+                },
+                {
+                    "inputs": [],
+                    "name": "GetAllDonations",
+                    "outputs": [
+                        {
+                            "components": [
+                                {
+                                    "internalType": "uint256",
+                                    "name": "donationAmount",
+                                    "type": "uint256"
+                                },
+                                {
+                                    "internalType": "address",
+                                    "name": "donateur",
+                                    "type": "address"
+                                }
+                            ],
+                            "internalType": "struct Donation.donation[]",
+                            "name": "",
+                            "type": "tuple[]"
+                        }
+                    ],
+                    "stateMutability": "view",
+                    "type": "function"
+                },
+                {
+                    "inputs": [],
+                    "name": "getTotalDonated",
+                    "outputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "total",
+                            "type": "uint256"
+                        }
+                    ],
+                    "stateMutability": "view",
+                    "type": "function"
+                },
+                {
+                    "inputs": [],
+                    "name": "getTotalInContract",
+                    "outputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "total",
+                            "type": "uint256"
+                        }
+                    ],
+                    "stateMutability": "view",
+                    "type": "function"
+                }
+            ];
+            contract = new web3.eth.Contract(SimpleContractABI, contractSimple);
+
+
+
+            const totalDonated = await contract.methods.getTotalDonated().call();
+            document.getElementById("TotalDonated").innerHTML = 'Totaal gedoneerd : ' + totalDonated;
+
+            const totalInContract = await contract.methods.getTotalInContract().call();
+            document.getElementById("TotalContract").innerHTML = 'Totaal in contract : ' + totalInContract;
+
+            const lastDonations = await contract.methods.GetAllDonations().call();
+            document.getElementById("LastDonations").innerHTML = 'Laatste donaties : ' + lastDonations;
+        }
+        window.addEventListener('DOMContentLoaded', f);
+
+        async function Doneer() {
+            contract.methods.donate().send({ from: address, gasPrice: web3.eth.gasPrice, value: 1000 });
+        }
+    </script>
+</body>
+</html>

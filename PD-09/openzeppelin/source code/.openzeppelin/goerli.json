@@ -1,0 +1,165 @@
+{
+  "manifestVersion": "3.1",
+  "impls": {
+    "c9a73973fc519767a2935477a4cf2a6f13e881d961c75bd7be03d2ba8cc5f579": {
+      "address": "0x76077430914367ECf84929a66af7Db757256b0d5",
+      "txHash": "0xf3721bddd1e4e9592540686de99b78ab6361cb1f923430afeea35fec47179066",
+      "layout": {
+        "storage": [
+          {
+            "contract": "Initializable",
+            "label": "initialized",
+            "type": "t_bool",
+            "src": "..\\@openzeppelin\\upgrades-core\\contracts\\Initializable.sol:23"
+          },
+          {
+            "contract": "Initializable",
+            "label": "initializing",
+            "type": "t_bool",
+            "src": "..\\@openzeppelin\\upgrades-core\\contracts\\Initializable.sol:28"
+          },
+          {
+            "contract": "Initializable",
+            "label": "______gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "..\\@openzeppelin\\upgrades-core\\contracts\\Initializable.sol:63"
+          },
+          {
+            "contract": "Donations",
+            "label": "owner",
+            "type": "t_address",
+            "src": "..\\..\\..\\..\\..\\..\\C\\Users\\Aron\\Desktop\\node\\openzeppelin\\contracts\\Donations.sol:8"
+          },
+          {
+            "contract": "Donations",
+            "label": "data",
+            "type": "t_uint256",
+            "src": "..\\..\\..\\..\\..\\..\\C\\Users\\Aron\\Desktop\\node\\openzeppelin\\contracts\\Donations.sol:9"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address"
+          },
+          "t_uint256": {
+            "label": "uint256"
+          },
+          "t_bool": {
+            "label": "bool"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]"
+          }
+        }
+      }
+    },
+    "345ddfd0b627109e9c5cc03a56254e46faafb8c627a845121e826636e66be53d": {
+      "address": "0x7F2A347352b0CDa8D9dE95D39D44C3AB123FbFFA",
+      "txHash": "0x91c34a8a414c0a6c4db6081f149b764fadc04a54cac1340a47db76fe826c1727",
+      "layout": {
+        "storage": [
+          {
+            "contract": "Initializable",
+            "label": "initialized",
+            "type": "t_bool",
+            "src": "..\\@openzeppelin\\upgrades-core\\contracts\\Initializable.sol:23"
+          },
+          {
+            "contract": "Initializable",
+            "label": "initializing",
+            "type": "t_bool",
+            "src": "..\\@openzeppelin\\upgrades-core\\contracts\\Initializable.sol:28"
+          },
+          {
+            "contract": "Initializable",
+            "label": "______gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "..\\@openzeppelin\\upgrades-core\\contracts\\Initializable.sol:63"
+          },
+          {
+            "contract": "Donations2",
+            "label": "owner",
+            "type": "t_address",
+            "src": "..\\..\\..\\..\\..\\..\\C\\Users\\Aron\\Desktop\\node\\openzeppelin\\contracts\\Donations2.sol:6"
+          },
+          {
+            "contract": "Donations2",
+            "label": "data",
+            "type": "t_uint256",
+            "src": "..\\..\\..\\..\\..\\..\\C\\Users\\Aron\\Desktop\\node\\openzeppelin\\contracts\\Donations2.sol:7"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address"
+          },
+          "t_uint256": {
+            "label": "uint256"
+          },
+          "t_bool": {
+            "label": "bool"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]"
+          }
+        }
+      }
+    },
+    "6c7378866dbae629c4c9066541efe64479c30a898c6c7f9f83537e8beac8b335": {
+      "address": "0xcD75f62C6aBcB8712eD8469B1eb3458628001083",
+      "txHash": "0x93bea53f57ab37e7a96fe028809dc69ebcec2dc7f20bb087dc5ab09d0a8d0a38",
+      "layout": {
+        "storage": [
+          {
+            "contract": "Initializable",
+            "label": "initialized",
+            "type": "t_bool",
+            "src": "..\\@openzeppelin\\upgrades-core\\contracts\\Initializable.sol:23"
+          },
+          {
+            "contract": "Initializable",
+            "label": "initializing",
+            "type": "t_bool",
+            "src": "..\\@openzeppelin\\upgrades-core\\contracts\\Initializable.sol:28"
+          },
+          {
+            "contract": "Initializable",
+            "label": "______gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "..\\@openzeppelin\\upgrades-core\\contracts\\Initializable.sol:63"
+          },
+          {
+            "contract": "Donations2",
+            "label": "owner",
+            "type": "t_address",
+            "src": "..\\..\\..\\..\\..\\..\\C\\Users\\Aron\\Desktop\\node\\openzeppelin\\contracts\\Donations2.sol:6"
+          },
+          {
+            "contract": "Donations2",
+            "label": "data",
+            "type": "t_uint256",
+            "src": "..\\..\\..\\..\\..\\..\\C\\Users\\Aron\\Desktop\\node\\openzeppelin\\contracts\\Donations2.sol:7"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address"
+          },
+          "t_uint256": {
+            "label": "uint256"
+          },
+          "t_bool": {
+            "label": "bool"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]"
+          }
+        }
+      }
+    }
+  },
+  "admin": {
+    "address": "0x8A560805ef32823B61125eCf367e33b0d121c88d",
+    "txHash": "0x2b063cfd5c78d1463eb78777ec880a000505f0560b67d131080e44d18c57da44"
+  }
+}

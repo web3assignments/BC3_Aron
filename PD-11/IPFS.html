@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <script src="https://bundle.run/buffer@5.2.1"></script>
+    <script src="https://unpkg.com/ipfs-http-client/dist/index.min.js"></script>
+    <script src="https://unpkg.com/ipfs-api@9.0.0/dist/index.js"></script>
+</head>
+
+<body>
+    <form action="/">
+        <fieldset>
+            <legend>Upload photo</legend>
+            <input type="file" name="photo" id="photo">
+            <button type="button" onclick="upload()">Upload</button>
+        </fieldset>
+    </form>
+
+    <pre id="log" style="width:100%;height:200px;"></pre>
+
+    <form action="/">
+        <fieldset>
+            <legend>Get photo</legend>
+            <input type="text" name="hashImage" id="hashImage">
+            <button type="button" onclick="getImage()">Get image</button>
+            <img id="output">
+        </fieldset>
+    </form>
+    
+</body>
+
+<script type="text/javascript">
+    function log(logstr) {
+        document.getElementById('log').innerHTML += logstr + "\n";
+    }
+
+    async function upload() {
+        const reader = new FileReader();
+        reader.onloadend = async function () {
+            const ipfs = window.IpfsHttpClient("https://ipfs.infura.io:5001"); // Connect to IPFS
+            const buf = await buffer.Buffer(reader.result) // Convert data into buffer
+            const result = await ipfs.add(buf).catch(log) // Upload buffer to IPFS
+            log(`cid=${result.path}`);
+            let url = `https://ipfs.io/ipfs/${result[0].path}`
+        }
+        const photo = document.getElementById("photo");
+        reader.readAsArrayBuffer(photo.files[0]); // Read Provided File
+    }
+
+    async function getImage() {
+        const hash = document.getElementById("hashImage").value;
+        document.getElementById("output").src = `https://ipfs.io/ipfs/${hash}`;
+    }
+</script>
+
+</html>

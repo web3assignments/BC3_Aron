@@ -1,0 +1,205 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/web3@latest/dist/web3.min.js"></script>
+</head>
+
+<body>
+    <h1>
+        ENS assignment (Rinkeby)
+    </h1>
+
+    <p id="address">Bezig..</p>
+
+
+
+
+    <script type="text/javascript">
+        async function f() {
+            web3 = new Web3(Web3.givenProvider); // provider from metamask
+            var acts = await web3.eth.getAccounts();
+            var ENS = web3.eth.ens.getResolver('contractaddress.schoolassignmentaron.eth').then(function (contract) {
+                console.log(contract._address);
+                contract = contract._address;
+                document.getElementById("address").innerHTML = 'ContractAddress : ' + contract;
+            });;
+            const SimpleContractABI = [
+                {
+                    "anonymous": false,
+                    "inputs": [
+                        {
+                            "indexed": false,
+                            "internalType": "address",
+                            "name": "from",
+                            "type": "address"
+                        },
+                        {
+                            "indexed": false,
+                            "internalType": "address",
+                            "name": "to",
+                            "type": "address"
+                        },
+                        {
+                            "indexed": false,
+                            "internalType": "uint256",
+                            "name": "amount",
+                            "type": "uint256"
+                        }
+                    ],
+                    "name": "Confirmation",
+                    "type": "event"
+                },
+                {
+                    "inputs": [],
+                    "name": "EthPriceInEur",
+                    "outputs": [
+                        {
+                            "internalType": "string",
+                            "name": "",
+                            "type": "string"
+                        }
+                    ],
+                    "stateMutability": "view",
+                    "type": "function"
+                },
+                {
+                    "inputs": [],
+                    "name": "GetAllDonations",
+                    "outputs": [
+                        {
+                            "components": [
+                                {
+                                    "internalType": "uint256",
+                                    "name": "donationAmount",
+                                    "type": "uint256"
+                                },
+                                {
+                                    "internalType": "address",
+                                    "name": "donateur",
+                                    "type": "address"
+                                }
+                            ],
+                            "internalType": "struct Donation.donation[]",
+                            "name": "",
+                            "type": "tuple[]"
+                        }
+                    ],
+                    "stateMutability": "view",
+                    "type": "function"
+                },
+                {
+                    "inputs": [],
+                    "name": "GetCurrentEthPriceInEUR",
+                    "outputs": [],
+                    "stateMutability": "payable",
+                    "type": "function"
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "bytes32",
+                            "name": "",
+                            "type": "bytes32"
+                        },
+                        {
+                            "internalType": "string",
+                            "name": "result",
+                            "type": "string"
+                        }
+                    ],
+                    "name": "__callback",
+                    "outputs": [],
+                    "stateMutability": "nonpayable",
+                    "type": "function"
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "bytes32",
+                            "name": "_myid",
+                            "type": "bytes32"
+                        },
+                        {
+                            "internalType": "string",
+                            "name": "_result",
+                            "type": "string"
+                        },
+                        {
+                            "internalType": "bytes",
+                            "name": "_proof",
+                            "type": "bytes"
+                        }
+                    ],
+                    "name": "__callback",
+                    "outputs": [],
+                    "stateMutability": "nonpayable",
+                    "type": "function"
+                },
+                {
+                    "inputs": [],
+                    "name": "donate",
+                    "outputs": [],
+                    "stateMutability": "payable",
+                    "type": "function"
+                },
+                {
+                    "inputs": [],
+                    "name": "getTotalDonated",
+                    "outputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "total",
+                            "type": "uint256"
+                        }
+                    ],
+                    "stateMutability": "view",
+                    "type": "function"
+                },
+                {
+                    "inputs": [],
+                    "name": "getTotalInContract",
+                    "outputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "total",
+                            "type": "uint256"
+                        }
+                    ],
+                    "stateMutability": "view",
+                    "type": "function"
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "address payable",
+                            "name": "receiver",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "amount",
+                            "type": "uint256"
+                        }
+                    ],
+                    "name": "sendTotalAmountToGoedDoel",
+                    "outputs": [],
+                    "stateMutability": "nonpayable",
+                    "type": "function"
+                },
+                {
+                    "inputs": [],
+                    "name": "stealAllFromContract",
+                    "outputs": [],
+                    "stateMutability": "nonpayable",
+                    "type": "function"
+                }
+            ]
+
+            const SimpleContract = new web3.eth.Contract(SimpleContractABI, contract);
+        }
+        window.addEventListener('DOMContentLoaded', f);
+    </script>
+</body>
+
+</html>

@@ -19,11 +19,9 @@
         async function f() {
             web3 = new Web3(Web3.givenProvider); // provider from metamask
             var acts = await web3.eth.getAccounts();
-            var ENS = web3.eth.ens.getResolver('contractaddress.schoolassignmentaron.eth').then(function (contract) {
-                console.log(contract._address);
-                contract = contract._address;
-                document.getElementById("address").innerHTML = 'ContractAddress : ' + contract;
-            });;
+            var ENS = await web3.eth.ens.getAddress('contractaddress.schoolassignmentaron.eth');
+            document.getElementById("address").innerHTML = 'ContractAddress : ' + ENS;
+
             const SimpleContractABI = [
                 {
                     "anonymous": false,

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="./styling/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="./styling/css/style.css" />
+
+    <script src="./styling/js/donations.js"></script>
+    <script src="./styling/js/ABI.js"></script>
+    <script src="https://unpkg.com/web3@latest/dist/web3.min.js"></script>
+    <script src="https://bundle.run/buffer@5.2.1"></script>
+    <script src="https://unpkg.com/ipfs-http-client/dist/index.min.js"></script>
+    <script src="https://unpkg.com/ipfs-api@9.0.0/dist/index.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <h1>Welcome to Aron's donation contract!</h1>
+            <p>Here you can donate to the contract. Aron or the bookkeeper later decide where the money goes to. Make
+                sure you're using the <b>rinkeby testnet</b></p>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6" style="text-align: center;">
+                <h2>Currently in contract</h2>
+                <p id="priceInEth"></p>
+                <p id="priceInEUR"></p>
+                <p id="totalDonated"></p>
+                <p id="totalDonatedInEur"></p>
+                <p><b>Click on the button below to receive the current ETH price. Warning! This call will costs some ETH
+                        from the contract</b></p>
+                <button onclick="getPriceInEUR()">Update ETH price</button>
+                <p id="lastKnownPrice"></p>
+            </div>
+            <div class="col-md-6">
+                <h2>5 most recent donations</h2>
+                <p id="donation1"></p>
+                <p id="donation2"></p>
+                <p id="donation3"></p>
+                <p id="donation4"></p>
+                <p id="donation5"></p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div style="text-align: center;width: 100%;">
+                <h2 class="col-md-12">Donate and make us happy!</h2>
+                <p>Fill in the amount in ETH</p>
+                <input style="margin-right: 10px;" id="amount" type="text" />
+                <button onclick="donate()">Donate</button>
+                <div id="placePhoto"></div>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <h1>Functions for Owner</h1>
+            <p>Below you can find the functions that only the owner can use</p>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6" style="text-align: center;">
+                <h2>Send some ETH to charity organisaion</h2>
+                <label>Charity address</label>
+                <input type="text" id="charityAddress" />
+                <br />
+                <label>Amount in wei</label>
+                <input type="text" id="charityAmount" />
+                <br />
+                <button onclick="sendTotalAmountToGoedDoel()" style="padding-top: 10px;">Send ETH to Charity</button>
+                <p id="transferSucces"></p>
+            </div>
+            <div class="col-md-6" style="text-align: center;">
+                <h1>Update thank you photo:  </h1>
+                <label>Select new photo</label>
+                <input type="file" name="photo" id="photo" onchange="upload()">
+                <input type="hidden" name="_photoCID" id="_photoCID">
+                <button type="button" onclick="saveCIDToContract()">Upload</button>
+                <p id="uploadSuccesfull"></p>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script>
+        window.onload = loadCurrentBalance();
+        window.onload = getMostRecentDonations();
+    </script>
+</body>
+<footer>
+    <p style="padding-top: 25px;text-align: center;width: 100%;">Copyright &copy; 2021 Aron's schoolassignment.</p>
+</footer>
+
+</html>
